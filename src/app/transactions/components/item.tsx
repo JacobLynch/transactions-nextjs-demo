@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Transaction } from '@/types/transaction';
-import { formatCurrency, formatDate } from '../../../lib/utils';
+import { formatCurrency, formatDate } from '@/lib/utils';
 import TableActions from './table-actions';
 import UpdateModal from './update-modal';
 
@@ -49,7 +49,7 @@ export function TransactionItem({ transaction }: TransactionItemProps) {
           {formatDate(transaction.transactionDate)}
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <TableActions transactionId={transaction.id.toString()} />
+          <TableActions transactionId={transaction.id} />
         </td>
       </tr>
 

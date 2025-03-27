@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { TransactionForm } from './form';
 import { CreateTransaction } from '@/types/transaction';

@@ -1,9 +1,8 @@
-'use client';
-
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TransactionForm } from './form';
 import { updateTransaction } from '../actions';
 import { CreateTransaction, Transaction } from '@/types/transaction';
+import { createPortal } from 'react-dom';
 
 interface UpdateModalProps {
   isOpen: boolean;
@@ -14,13 +13,51 @@ interface UpdateModalProps {
 export default function UpdateModal({ isOpen, onClose, transaction }: UpdateModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousActiveElement = useRef<Element | null>(null);
+
+  // Handle focus management
+  useEffect(() => {
+    if (isOpen) {
+      // Store the currently focused element
+      previousActiveElement.current = document.activeElement;
+      
+      // Focus the modal when it opens
+      if (modalRef.current) {
+        modalRef.current.focus();
+      }
+    } else if (previousActiveElement.current) {
+      // Restore focus when modal closes
+      (previousActiveElement.current as HTMLElement).focus();
+    }
+  }, [isOpen]);
+
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      // Restore body scroll when modal closes
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
 
   const handleSubmit = async (data: CreateTransaction) => {
     try {
       setIsSubmitting(true);
       setError(null);
       
-      // Add the ID to the data for the update
       const updateData = {
         ...data,
         id: transaction.id,
@@ -44,23 +81,34 @@ export default function UpdateModal({ isOpen, onClose, transaction }: UpdateModa
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+  return createPortal(
+    <div 
+      className="fixed inset-0 z-50 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
       <div className="flex min-h-full items-center justify-center p-4 text-center">
         {/* Backdrop */}
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" 
           onClick={onClose}
+          aria-hidden="true"
         />
 
         {/* Modal content */}
-        <div className="relative transform overflow-hidden rounded-lg bg-white p-6 text-left shadow-xl transition-all w-full max-w-md">
+        <div 
+          ref={modalRef}
+          className="relative transform overflow-hidden rounded-lg bg-white p-6 text-left shadow-xl transition-all w-full max-w-md"
+          tabIndex={-1}
+        >
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">Edit Transaction</h3>
+            <h3 id="modal-title" className="text-lg font-semibold text-gray-900">Edit Transaction</h3>
             <button
               type="button"
               className="text-gray-400 hover:text-gray-500"
               onClick={onClose}
+              aria-label="Close modal"
             >
               <span className="sr-only">Close</span>
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -92,6 +140,7 @@ export default function UpdateModal({ isOpen, onClose, transaction }: UpdateModa
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 } 

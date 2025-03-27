@@ -13,6 +13,8 @@ This directory contains end-to-end tests for the transaction CRUD (Create, Read,
 
 ### Prerequisites
 
+Note: You'll want to make sure all your transactions are deleted before you run the tests in order.
+
 1. Make sure you have installed all dependencies:
    ```
    npm install
@@ -36,7 +38,7 @@ This directory contains end-to-end tests for the transaction CRUD (Create, Read,
 
    - Run a specific test:
      ```
-     npx cypress run --spec "tests/e2e/transaction-create.cy.ts"
+     npx cypress run --spec "tests/e2e/01-transaction-create.cy.ts"
      ```
 
    - Open Cypress GUI for interactive testing:

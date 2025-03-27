@@ -4,7 +4,7 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 import { deleteTransaction } from '../actions';
 
 type TableActionsProps = {
-  transactionId: string;
+  transactionId: bigint;
 };
 
 export default function TableActions({ transactionId }: TableActionsProps) {
@@ -15,7 +15,7 @@ export default function TableActions({ transactionId }: TableActionsProps) {
     if (confirmDelete) {
       try {
         // Convert string ID to BigInt for the action
-        const result = await deleteTransaction(BigInt(transactionId));
+        const result = await deleteTransaction(transactionId);
         
         if (result.error) {
           // Show error message if deletion fails
