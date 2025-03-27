@@ -9,7 +9,13 @@
     "lint": "next lint",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "test": "cypress run"
+    "test": "cypress run",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "db:migrate": "prisma migrate deploy",
+    "db:generate": "prisma generate",
+    "db:studio": "prisma studio",
+    "setup": "npm run docker:up && npm run db:generate && npm run db:migrate"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
