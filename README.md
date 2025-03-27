@@ -1,7 +1,7 @@
 ## Dependencies
-Docker
-Node 18+
-NPM
+- Docker
+- Node 18+
+- NPM
 
 ## Getting Started
 
@@ -18,6 +18,7 @@ npm run setup
 
 This command will:
 - Start the PostgreSQL database in a Docker container
+- Install node dependencies
 - Generate Prisma client
 - Apply all database migrations
 
