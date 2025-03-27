@@ -59,15 +59,10 @@ export async function updateTransaction(data: z.infer<typeof updateTransactionSc
     const validatedData = updateTransactionSchema.parse(data);
     const { id, ...updateData } = validatedData;
     
-    // If amount is being updated, convert it to cents for database storage
-    const dbData = updateData.amount !== undefined 
-      ? { ...updateData, amount: Math.round(updateData.amount * 100) }
-      : updateData;
-    
     // Update the transaction
     const transaction = await prisma.transaction.update({
       where: { id },
-      data: dbData,
+      data: updateData,
     });
     
     // Revalidate the transactions path to update the UI
