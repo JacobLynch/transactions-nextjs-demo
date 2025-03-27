@@ -32,4 +32,3 @@ export const updateTransactionSchema = frontendTransactionSchema
 // Types inferred from the schemas
 export type Transaction = z.infer<typeof transactionSchema>;
 export type CreateTransaction = z.infer<typeof frontendTransactionSchema>;
-export type UpdateTransaction = z.infer<typeof updateTransactionSchema>;

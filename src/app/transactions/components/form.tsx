@@ -25,8 +25,7 @@ export function TransactionForm({
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
-    watch
+    setValue
   } = useForm<CreateTransaction>({
     resolver: zodResolver(createTransactionSchema),
     defaultValues: {
@@ -51,9 +50,6 @@ export function TransactionForm({
     };
   });
 
-  // Watch transaction date for validation errors
-  const watchTransactionDate = watch('transactionDate');
-
   // Update the ISO datetime string whenever local date or time changes
   useEffect(() => {
     if (localDate.date) {
@@ -65,7 +61,7 @@ export function TransactionForm({
         if (!isNaN(dateObj.getTime())) {
           setValue('transactionDate', dateObj.toISOString(), { shouldValidate: true });
         }
-      } catch (err) {
+      } catch {
         // Silent catch - validation will handle error display
       }
     }

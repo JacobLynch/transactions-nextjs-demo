@@ -4,10 +4,10 @@ This directory contains end-to-end tests for the transaction CRUD (Create, Read,
 
 ## Test Files
 
-- `transaction-create.cy.ts`: Tests creating a new transaction
-- `transaction-read.cy.ts`: Tests listing and viewing transactions
-- `transaction-update.cy.ts`: Tests updating an existing transaction
-- `transaction-delete.cy.ts`: Tests deleting a transaction
+- `01-transaction-create.cy.ts`: Tests creating a new transaction
+- `02-transaction-read.cy.ts`: Tests listing and viewing transactions
+- `03-transaction-update.cy.ts`: Tests updating an existing transaction
+- `04-transaction-delete.cy.ts`: Tests deleting a transaction
 
 ## Running the Tests
 
@@ -31,7 +31,7 @@ This directory contains end-to-end tests for the transaction CRUD (Create, Read,
 
    - Run all transaction tests:
      ```
-     npm run test:transactions
+     npm run test
      ```
 
    - Run a specific test:
@@ -48,10 +48,10 @@ This directory contains end-to-end tests for the transaction CRUD (Create, Read,
 
 For the most reliable results, run the tests in this order:
 
-1. `transaction-create.cy.ts` - Creates test data for other tests
-2. `transaction-read.cy.ts` - Reads and verifies data
-3. `transaction-update.cy.ts` - Updates existing data
-4. `transaction-delete.cy.ts` - Deletes data and verifies empty state
+1. `01-transaction-create.cy.ts` - Creates test data for other tests
+2. `02-transaction-read.cy.ts`   - Reads and verifies data
+3. `03-transaction-update.cy.ts` - Updates existing data
+4. `04-transaction-delete.cy.ts` - Deletes data and verifies empty state
 
 ## Troubleshooting
 

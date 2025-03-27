@@ -8,11 +8,6 @@ type TableActionsProps = {
 };
 
 export default function TableActions({ transactionId }: TableActionsProps) {
-  const handleEdit = () => {
-    // Edit action logic
-    console.log('Edit transaction', transactionId);
-  };
-
   const handleDelete = async () => {
     // Use browser's built-in confirm dialog
     const confirmDelete = window.confirm('Are you sure you want to delete this transaction? This action cannot be undone.');

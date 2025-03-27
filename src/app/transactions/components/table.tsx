@@ -1,6 +1,4 @@
 import { Transaction } from '@/types/transaction';
-import { formatCurrency, formatDate } from '../../../lib/utils';
-import TableActions from './table-actions';
 import { TransactionItem } from './item';
 
 type TransactionsTableProps = {
