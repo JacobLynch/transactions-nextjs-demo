@@ -33,6 +33,9 @@ export function TransactionItem({ transaction }: TransactionItemProps) {
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
           {transaction.title}
         </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          {transaction.description}
+        </td>
         <td className={`px-6 py-4 whitespace-nowrap text-sm ${transaction.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
           {formatCurrency(transaction.amount/100)}
         </td>

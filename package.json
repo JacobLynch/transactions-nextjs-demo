@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "cypress run"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -21,6 +24,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/cypress": "^10.0.3",
+    "@types/cypress": "^0.1.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
